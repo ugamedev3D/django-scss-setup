@@ -1,0 +1,21 @@
+{% extends "account/base_entrance.html" %}
+{% load static i18n %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "Verify Your Email Address" %}
+{% endblock head_title %}
+{% block content %}
+    {% element div class="email-box-container" %}
+        {% element h1 %}
+            {% trans "Email Verification" %}
+        {% endelement %}
+        <img src="{% static 'svg/email-verification-icon.svg' %}" alt="">
+        {% element h2 %}
+            {% trans "Verify Your Email Address" %}
+        {% endelement %}
+        {% element hr %}{% endelement %}
+        {% element p %}
+            {% blocktrans %}We sent a verification link to your email. Please check your inbox and click the link to complete your signup. If you don’t see it, check your spam folder.{% endblocktrans %}
+        {% endelement %}
+    {% endelement %}
+{% endblock content %}

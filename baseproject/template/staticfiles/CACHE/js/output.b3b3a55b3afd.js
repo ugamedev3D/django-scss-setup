@@ -1,0 +1,2 @@
+function copyCode(btn){const block=btn.closest('.code').querySelector('.code-body');const lines=block.querySelectorAll('.cmd');const text=Array.from(lines).map(l=>l.textContent).join('\n');navigator.clipboard.writeText(text).then(()=>{btn.textContent='copied!';setTimeout(()=>btn.textContent='copy',1800);});}
+document.querySelectorAll('.nav-link').forEach(link=>{link.addEventListener('click',function(){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));this.classList.add('active');});});;

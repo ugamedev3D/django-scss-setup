@@ -1,0 +1,5 @@
+{% if user.avatar %}
+    <img src="{{user.avatar.url}}" alt="">
+{% else %}
+    <h2>{{user.username.0|title }}</h2>
+{% endif %}

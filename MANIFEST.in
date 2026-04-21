@@ -1,0 +1,2 @@
+recursive-include baseproject/template *
+recursive-include baseproject/static *.css *.js *.png *.jpg *.svg

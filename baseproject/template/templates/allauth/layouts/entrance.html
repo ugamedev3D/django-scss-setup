@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block base_content %}
+    <div class="box-entrance">
+        <div class="auth-container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    
+{% endblock base_content %}

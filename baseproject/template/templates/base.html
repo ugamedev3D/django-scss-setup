@@ -1,0 +1,63 @@
+{% load static compress django_htmx %}
+{% load livereload_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>django-base · Get Started</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap" rel="stylesheet" />
+    {% compress js %}
+        <script src="{% static 'js/main.js' %}" defer></script>
+    {% endcompress %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/css"  href="{% static 'css/style.css' %}">
+        <link rel="icon" sizes="any" type="image/svg+xml" color="#79be81" href="{% static 'img/piccoto.svg' %}">     
+    {% endcompress %}
+    {% livereload_script %}
+    {% htmx_script %}
+</head>
+<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
+    <header class="header-base">
+        <nav class="nav-wrapper">
+            <div class="wrapper-container">
+                <a href="{% url "pages:home" %}" class="text-highlight">Home</a>
+            </div>
+            <div class="btn-wrapper-nav">
+                
+                <div class="v-line"></div>
+                {% if user.is_authenticated %}
+                <div class="wrapper-container">
+                    <div class="profile-img">
+                        {% include "allauth/includes/user_avatar.html" %}
+                    </div>
+                    <div class="profile-content-box">
+                        <div class="profile-img mid-size">
+                            {% include "allauth/includes/user_avatar.html" %}
+                        </div>
+                        <span>{{user.username}}</span>
+                        <hr>
+                        {% include 'account/logout.html' %}
+                    </div>
+                </div>
+                {% else %}
+                <div class="loginfrom">
+                    <a href="{% url "user:account_login" %}">Login</a>
+                    <span>or</span>
+                    <a href="{% url "user:account_signup" %}">Signup</a>
+                </div>
+                {% endif %}
+                
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block base_content %}
+            
+        {% endblock base_content %}
+    </main>
+
+</body>
+</html>

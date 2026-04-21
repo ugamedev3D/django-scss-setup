@@ -1,0 +1,5 @@
+{% load allauth %}
+<ul {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
+        {% if attrs.class %}class="{{ attrs.class }}"{% endif %}>
+    {% for action in slots.actions %}<li>{{ action }}</li>{% endfor %}
+</ul>

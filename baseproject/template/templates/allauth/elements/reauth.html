@@ -1,0 +1,12 @@
+{% load allauth %}
+<section {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
+        {% if attrs.class %}class="{{ attrs.class }}"{% endif %}>
+    <h1>
+        {% slot title %}
+        {% endslot %}
+    </h1>
+    <section>
+        {% slot body %}
+        {% endslot %}
+    </section>
+</section>

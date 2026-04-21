@@ -1,0 +1,6 @@
+{% load allauth %}
+<table  {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
+        {% if attrs.class %}class="{{ attrs.class }}"{% endif %}>
+    {% slot %}
+    {% endslot %}
+</table>

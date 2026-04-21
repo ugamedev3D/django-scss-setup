@@ -1,0 +1,36 @@
+[project]
+name = "django-base"
+version = "0.1.1"
+description = "Base Django project template with allauth (Google, Facebook) and modular settings"
+readme = "README.md"
+license = "MIT"
+
+authors = [
+    { name = "Jamal Blaquera", email = "ugamedev08@gmail.com" }
+]
+
+dependencies = [
+    "django",
+    "django-allauth",
+    "django-allauth[socialaccount]",
+    "django-environ",
+    "django-htmx",
+    "django-livereload-server",
+    "django-compressor",
+    "pillow",
+    "whitenoise",
+    "requests"
+]
+
+[tool.setuptools]
+packages = ["baseproject"]
+
+[tool.setuptools.package-data]
+baseproject = ["template/**/*", "template/**/*.html", "template/**/*.css", "template/**/*.js", "template/**/*.png", "template/**/*.jpg", "template/**/*.svg"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+django-base = "baseproject.cli:create_project"
