@@ -15,18 +15,11 @@ dependencies = [
     "django-allauth[socialaccount]",
     "django-environ",
     "django-htmx",
-    "django-livereload-server",
     "django-compressor",
     "django-sass-processor",
     "pillow",
     "whitenoise",
     "requests"
-]
-
-classifiers = [
-  "Framework :: Django",
-  "Programming Language :: Python :: 3",
-  "License :: MIT License",
 ]
 
 [tool.setuptools]
@@ -41,4 +34,4 @@ build-backend = "setuptools.build_meta"
 
 [project.scripts]
 django-base = "baseproject.cli:create_project"
-django-base-scss = "baseproject.cli:scss_setup"
+django-base-scss = "baseproject.cli:cli"
