@@ -47,6 +47,3 @@ def cli():
 cli.add_command(init.init)
 cli.add_command(dev.dev)
 cli.add_command(install.install)
-
-if __name__ == "__main__":
-    cli()
