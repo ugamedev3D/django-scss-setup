@@ -4,7 +4,7 @@ from importlib.resources import files
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 
-from baseproject.commands import init, dev, install
+from base_django.commands import init, dev, install
 
 def create_project():
     parser = argparse.ArgumentParser(description="Create Django base project")
@@ -13,7 +13,7 @@ def create_project():
     args = parser.parse_args()
     name = args.name
 
-    template_dir = files("baseproject").joinpath("template")
+    template_dir = files("base_django").joinpath("template")
 
     if not Path(template_dir).exists():
         raise FileNotFoundError(f"Template folder not found at {template_dir}")
