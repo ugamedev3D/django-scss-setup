@@ -1,9 +1,10 @@
 [project]
 name = "django-base-scss-setup"
 version = "0.1.1"
-description = "Quick SCSS (Sass) setup for Django projects with Django Base project template with allauth (Google, Facebook) and modular settings"
+description = "Quick SCSS setup for Django with base template"
 readme = "README.md"
 license = "MIT"
+requires-python = ">=3.9"
 
 authors = [
     { name = "Jamal Blaquera", email = "ugamedev08@gmail.com" }
@@ -11,13 +12,11 @@ authors = [
 
 dependencies = [
     "django",
-    "django-allauth",
     "django-allauth[socialaccount]",
     "django-environ",
     "django-htmx",
     "django-compressor",
-    "django-sass-processor",
-    "click",
+    "click>=8.0",
     "pillow",
     "whitenoise",
     "requests"
@@ -27,17 +26,7 @@ dependencies = [
 packages = ["base_django"]
 
 [tool.setuptools.package-data]
-base_django = [
-    "template/**/*", 
-    "template/**/*.html", 
-    "scss_template/**/*",
-    "scss_template/**/*.scss",
-    "template/**/*.css", 
-    "template/**/*.js", 
-    "template/**/*.png", 
-    "template/**/*.jpg", 
-    "template/**/*.svg"
-]
+base_django = ["**/*"]
 
 [build-system]
 requires = ["setuptools"]

@@ -1,2 +1,2 @@
-recursive-include baseproject/template *
-recursive-include baseproject/static *.css *.js *.png *.jpg *.svg
+recursive-include base_django/template *
+recursive-include base_django/static *.css *.js *.png *.jpg *.svg
