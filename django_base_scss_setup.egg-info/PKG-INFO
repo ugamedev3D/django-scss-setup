@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: django-base-scss-setup
+Version: 0.1.1
+Summary: Quick SCSS setup for Django with base template
+Author: "Jamal Blaquera"
+Author-email: Jamal Blaquera <ugamedev08@gmail.com>
+License-Expression: MIT
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: django
+Requires-Dist: django-allauth[socialaccount]
+Requires-Dist: django-environ
+Requires-Dist: django-htmx
+Requires-Dist: django-compressor
+Requires-Dist: click>=8.0
+Requires-Dist: pillow
+Requires-Dist: whitenoise
+Requires-Dist: requests

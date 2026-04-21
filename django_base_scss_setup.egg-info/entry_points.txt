@@ -1,0 +1,3 @@
+[console_scripts]
+django-base = base_django.cli:create_project
+django-base-scss = base_django.cli:cli

@@ -1,0 +1,9 @@
+django
+django-allauth[socialaccount]
+django-environ
+django-htmx
+django-compressor
+click>=8.0
+pillow
+whitenoise
+requests

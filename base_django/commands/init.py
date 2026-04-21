@@ -1,32 +1,43 @@
 import shutil
-
-import click, argparse
+import click
 from pathlib import Path
 import json
 from importlib.resources import files
-from .utils import get_root, pathFile
+from .utils import pathFile
 
 @click.command()
-@click.option("-scss-t", "-scss-templates", help="install SCSS template package")
-def init(scss_template): 
-    name = get_root.get_root_project()
+@click.option("-s", "--scss-templates", is_flag=True, help="Install SCSS template package")
+def init(scss_templates):
 
-    click.echo("Initializing SCSS setup")
+    click.echo("Initializing SCSS setup...")
 
     scssPath = Path("static/scss")
-    scssPath.mkdir(parents=True, exist_ok=True)
-
     cssPath = Path("static/css")
-    cssPath.mkdir(parents=True, exist_ok=True)
 
-    if (scss_template and pathFile.folder_delete(scssPath)):
-        scss_template_dir = pathFile("baseproject").joinpath("scss_template")
+    # Only create dirs if not installing templates (templates will copy their own)
+    if not scss_templates:
+        scssPath.mkdir(parents=True, exist_ok=True)
+        cssPath.mkdir(parents=True, exist_ok=True)
+        click.echo("static/scss and static/css created.")
 
+    if scss_templates:
+        cssPath.mkdir(parents=True, exist_ok=True)
+
+        # If scss folder already exists, ask to delete it
+        if scssPath.exists():
+            if not pathFile.confirm_delete(f"{scssPath} already exists. Delete it? (y/n): "):
+                click.echo("Aborted.")
+                return
+            pathFile.folder_delete(scssPath)
+
+        # Copy SCSS templates
+        scss_template_dir = files("base_django").joinpath("scss_template")
         create_scss_template(scss_template_dir, scssPath)
-            
-    #Create package.json 
+        click.echo("SCSS templates installed.")
+
+    # Create package.json
     package = {
-        "name": name,
+        "name": "base_django",
         "version": "1.0.0",
         "scripts": {
             "scss:watch": "sass static/scss:static/css --watch"
@@ -34,26 +45,13 @@ def init(scss_template):
     }
     with open("package.json", "w") as f:
         json.dump(package, f, indent=2)
-    click.echo("package.json created")
+    click.echo("package.json created.")
 
-    # #Create dev.ps1
-    # with open("dev.ps1", "w") as f:
-    #     f.write("""Start-Process powershell -ArgumentList "python manager.py runserver" 
-    #             Start-Process powershell -ArgumentList "npm run scss:watch"
-    #             """)
-    # click.echo("dev.ps1 created")
-    
-    # #Create dev.ps1
-    # with open("dev.sh", "w") as f:
-    #     f.write("""#!/bin/bash
-    #             python manage.py runserver & npm run scss:watch
-    #             """)
-    # click.echo("dev.sh created")
-    
-    click.echo("Setup completed")
+    click.echo("Setup completed.")
 
 
-def create_scss_template(dir, name):
-    if not Path(dir).exists():
-        raise FileNotFoundError(f"SCSS template not found a {dir}")
-    shutil.copytree(str(dir), name)
+def create_scss_template(src, dest):
+    src = Path(str(src))
+    if not src.exists():
+        raise FileNotFoundError(f"SCSS template not found at {src}")
+    shutil.copytree(str(src), dest)
