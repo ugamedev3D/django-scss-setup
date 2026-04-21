@@ -1,0 +1,13 @@
+// FUNCTIONS
+// Used to create reusable logic that returns a value
+
+// Usage:
+// body {
+//   font-size: rem(16);
+// }
+
+// Example: convert px to rem
+@function rem($px) {
+  @return $px / 16 * 1rem;
+}
+

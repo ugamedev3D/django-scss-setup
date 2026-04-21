@@ -1,0 +1,14 @@
+
+// MIXINS
+// Used to reuse blocks of styles with parameters
+// Usage:
+// .container {
+//   @include flex-center;
+// }
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

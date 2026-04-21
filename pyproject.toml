@@ -1,7 +1,7 @@
 [project]
-name = "django-base"
+name = "django-base-scss-setup"
 version = "0.1.1"
-description = "Base Django project template with allauth (Google, Facebook) and modular settings"
+description = "Quick SCSS (Sass) setup for Django projects with Django Base project template with allauth (Google, Facebook) and modular settings"
 readme = "README.md"
 license = "MIT"
 
@@ -17,9 +17,16 @@ dependencies = [
     "django-htmx",
     "django-livereload-server",
     "django-compressor",
+    "django-sass-processor",
     "pillow",
     "whitenoise",
     "requests"
+]
+
+classifiers = [
+  "Framework :: Django",
+  "Programming Language :: Python :: 3",
+  "License :: MIT License",
 ]
 
 [tool.setuptools]
@@ -34,3 +41,4 @@ build-backend = "setuptools.build_meta"
 
 [project.scripts]
 django-base = "baseproject.cli:create_project"
+django-base-scss = "baseproject.cli:scss_setup"

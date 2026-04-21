@@ -1,0 +1,27 @@
+// CUSTOM PROPERTIES (CSS VARIABLES)
+// Useful for dynamic theming
+
+// Basic sample @property code use on scss
+
+// Usage:
+// .box {
+     // root property
+//   color: var(--main-color);
+
+     // @property
+//   width: var(--sidebar-width);
+// }
+
+
+
+@property --sidebar-width {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 10px;
+}
+
+:root {
+  --main-color: #3498db;
+}
+
+
