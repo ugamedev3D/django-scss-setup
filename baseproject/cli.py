@@ -4,7 +4,7 @@ from importlib.resources import files
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 
-from .commands import init, dev, install
+from baseproject.commands import init, dev, install
 
 def create_project():
     parser = argparse.ArgumentParser(description="Create Django base project")
