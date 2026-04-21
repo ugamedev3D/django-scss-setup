@@ -24,10 +24,10 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["base-django"]
+packages = ["base_django"]
 
 [tool.setuptools.package-data]
-base-django = [
+base_django = [
     "template/**/*", 
     "template/**/*.html", 
     "scss_template/**/*",
@@ -44,5 +44,5 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-django-base = "base-django.cli:create_project"
-django-base-scss = "base-django.cli:cli"
+django-base = "base_django.cli:create_project"
+django-base-scss = "base_django.cli:cli"
