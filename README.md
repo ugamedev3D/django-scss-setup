@@ -18,16 +18,35 @@ A command-line tool for scaffolding Django projects with SCSS support out of the
 pip install django-base-scss-setup
 ```
 
+Or install directly from GitHub:
+
+```bash
+pip install git+https://github.com/ugamedev3D/django-scss-setup.git
+```
+
 ---
 
 ## Available Commands
 
-The package exposes two CLI entry points:
+The package exposes CLI entry points:
 
-| Command | Description |
+```bash
+django-base
+```
+Show Usage: django-base [OPTIONS] COMMAND [ARGS]...
+
+|Options:
+|---|
+|  --help | Show this message and exit.|
+
+
+| Commands | Description |
 |---|---|
-| `django-base <name>` | Scaffold a new Django project |
-| `django-base-scss <subcommand>` | Manage SCSS setup within an existing project |
+| `django-base startproject <name>` | Scaffold a new Django project |
+| `django-base init` | Init templates dependencies |
+| `django-base install` | Install npm dependencies |
+| `django-base dev` | Run Django + SCSS watcher |
+| `django-base uninstall` | Uninstall npm dependencies |
 
 ---
 
@@ -36,7 +55,7 @@ The package exposes two CLI entry points:
 ### Create a New Project
 
 ```bash
-django-base myproject
+django-base startproject myproject
 ```
 
 This copies the base Django template into a new directory named `myproject` and generates a `.env` file pre-populated with a random secret key and placeholder OAuth and email credentials.
@@ -48,7 +67,7 @@ This copies the base Django template into a new directory named `myproject` and 
 Run this inside your project directory:
 
 ```bash
-django-base-scss init
+django-base init
 ```
 
 This creates the `static/scss` and `static/css` directories and generates a `package.json` configured with an SCSS watch script.
@@ -56,7 +75,7 @@ This creates the `static/scss` and `static/css` directories and generates a `pac
 To also install the bundled SCSS template files:
 
 ```bash
-django-base-scss init --scss-templates
+django-base init --scss-templates
 ```
 
 If a `static/scss` directory already exists, you will be prompted before it is overwritten.
@@ -68,19 +87,19 @@ If a `static/scss` directory already exists, you will be prompted before it is o
 Run `npm install` and install the Sass compiler:
 
 ```bash
-django-base-scss install
+django-base install
 ```
 
 Install only Sass without running `npm install`:
 
 ```bash
-django-base-scss install --no-npm
+django-base install --no-npm
 ```
 
 Install additional npm packages:
 
 ```bash
-django-base-scss install --add axios --add alpinejs
+django-base install --add axios --add alpinejs
 ```
 
 ---
@@ -90,7 +109,7 @@ django-base-scss install --add axios --add alpinejs
 Starts the Django development server and the SCSS watcher concurrently:
 
 ```bash
-django-base-scss dev
+django-base dev
 ```
 
 Press `Ctrl+C` to stop both processes. If either process exits unexpectedly, the other will be terminated automatically.
@@ -99,7 +118,7 @@ Press `Ctrl+C` to stop both processes. If either process exits unexpectedly, the
 
 ## Project Structure
 
-After running `django-base myproject` and `django-base-scss init`, your project will have the following layout:
+After running `django-base startproject myproject` and `django-base init`, your project will have the following layout:
 
 ```
 myproject/

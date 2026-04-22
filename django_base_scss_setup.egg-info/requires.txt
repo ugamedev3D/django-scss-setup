@@ -2,6 +2,7 @@ django
 django-allauth[socialaccount]
 django-environ
 django-htmx
+django-livereload-server
 django-compressor
 click>=8.0
 pillow

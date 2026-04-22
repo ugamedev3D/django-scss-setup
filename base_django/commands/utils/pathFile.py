@@ -26,3 +26,11 @@ def folder_exist(file_path: Path):
 
 def confirm_delete(prompt="Are you sure? (y/n): "):
     return input(prompt).strip().lower() in ("y", "yes")
+
+def clearListedFiles(path, filelist):
+    files = [p for p in path.rglob("*") if p.is_file()]    
+    for file in files:
+        if file.is_file():
+            for name in filelist:
+                if file.name != name:
+                    file.write_text("")

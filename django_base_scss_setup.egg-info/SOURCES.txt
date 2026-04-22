@@ -5,11 +5,15 @@ setup.cfg
 base_django/__init__.py
 base_django/cli.py
 base_django/commands/__init__.py
+base_django/commands/create_project.py
 base_django/commands/dev.py
 base_django/commands/init.py
 base_django/commands/install.py
+base_django/commands/uninstall.py
 base_django/commands/utils/__init__.py
+base_django/commands/utils/directory.py
 base_django/commands/utils/get_root.py
+base_django/commands/utils/packageUtils.py
 base_django/commands/utils/pathFile.py
 base_django/scss_template/__init__.py
 base_django/scss_template/style.scss

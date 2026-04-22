@@ -4,11 +4,13 @@ import shutil
 import sys
 from pathlib import Path
 
+from .utils import package, directory
+
 @click.command()
-@click.option("--sass/--no-sass", default=True, help="Install Sass")
-@click.option("--npm/--no-npm", "install_npm", default=True, help="Run npm install")
-@click.option("--add", multiple=True, metavar="PACKAGE", help="Install extra npm packages (repeatable)")
-def install(sass, install_npm, add):
+@click.option("--sass", is_flag=True, default=False, help="Install Sass")
+@click.option("--npm", "install_npm", is_flag=True, default=False, help="Run npm install")
+@click.option("--pkg", "packages", multiple=True, metavar="PACKAGE", help="Install extra npm packages (repeatable)")
+def install(sass, install_npm, packages):
     """Install npm dependencies"""
 
     click.echo("Installing dependencies...")
@@ -20,28 +22,21 @@ def install(sass, install_npm, add):
         return
 
     # Run npm from the directory where package.json lives
-    cwd = Path.cwd()
-    package_json = cwd / "package.json"
-
-    if not package_json.exists():
-        click.echo(f"No package.json found in {cwd}")
-        click.echo("Run this command from your project root.")
-        return
+    cwd = directory.cwd()
 
     try:
         if install_npm:
-            subprocess.run([npm_cmd, "install"], check=True, cwd=cwd)
+            subprocess.run([npm_cmd, "install", "npm"], check=True, cwd=cwd)
             click.echo("npm install complete")
 
         if sass:
             subprocess.run([npm_cmd, "install", "sass", "--save-dev"], check=True, cwd=cwd)
             click.echo("Sass installed")
 
-        if add:
-            for package in add:
-                click.echo(f"Installing {package}...")
-                subprocess.run([npm_cmd, "install", package], check=True, cwd=cwd)
-                click.echo(f"{package} installed")
+        if packages:
+            package.add_remove_package(packages, "install", npm_cmd, cwd, "--save-dev")
+
 
     except subprocess.CalledProcessError:
         click.echo("Installation failed.")
+

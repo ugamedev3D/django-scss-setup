@@ -34,5 +34,4 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-django-base = "base_django.cli:create_project"
-django-base-scss = "base_django.cli:cli"
+django-base = "base_django.cli:cli"
