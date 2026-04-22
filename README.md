@@ -1,6 +1,21 @@
 # django-base-scss-setup
 
-A command-line tool for scaffolding Django projects with SCSS support out of the box. It automates the creation of a base project structure, configures static file directories, installs npm dependencies, and runs a concurrent Django development server with a live SCSS watcher.
+A CLI tool for scaffolding Django projects with SCSS support out of the box. It automates project creation, configures static file directories, installs npm dependencies, and runs a concurrent Django development server alongside a live SCSS watcher.
+
+[![PyPI version](https://img.shields.io/pypi/v/django-base-scss-setup)](https://pypi.org/project/django-base-scss-setup/)
+[![Python](https://img.shields.io/pypi/pyversions/django-base-scss-setup)](https://pypi.org/project/django-base-scss-setup/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
+
+## Features
+
+- Scaffold a complete Django project with a single command
+- Auto-generates a `.env` file with a random secret key and placeholder credentials
+- Sets up `static/scss` and `static/css` directories with a live SCSS watcher
+- Installs and manages npm dependencies (including Sass)
+- Runs the Django dev server and SCSS compiler concurrently
+- Preconfigured with `django-allauth` (Google & Facebook OAuth), `django-htmx`, `django-compressor`, WhiteNoise, and more
 
 ---
 
@@ -26,51 +41,60 @@ pip install git+https://github.com/ugamedev3D/django-scss-setup.git
 
 ---
 
-## Available Commands
-
-The package exposes CLI entry points:
+## Quick Start
 
 ```bash
-django-base
+# 1. Create a new project
+django-base startproject myproject
+cd myproject
+
+# 2. Initialize SCSS structure
+django-base init
+
+# 3. Install npm dependencies
+django-base install
+
+# 4. Start the development server + SCSS watcher
+django-base dev
 ```
-Show Usage: django-base [OPTIONS] COMMAND [ARGS]...
 
-|Options:
-|---|
-|  --help | Show this message and exit.|
+---
 
+## Commands
 
-| Commands | Description |
+| Command | Description |
 |---|---|
 | `django-base startproject <name>` | Scaffold a new Django project |
-| `django-base init` | Init templates dependencies |
-| `django-base install` | Install npm dependencies |
-| `django-base dev` | Run Django + SCSS watcher |
-| `django-base uninstall` | Uninstall npm dependencies |
+| `django-base init` | Create SCSS/CSS directories and generate `package.json` |
+| `django-base install` | Run `npm install` and install the Sass compiler |
+| `django-base dev` | Start Django server and SCSS watcher concurrently |
+| `django-base uninstall` | Remove npm dependencies |
+
+Run `django-base --help` or `django-base <command> --help` for full usage.
 
 ---
 
 ## Usage
 
-### Create a New Project
+### `startproject`
 
 ```bash
 django-base startproject myproject
 ```
 
-This copies the base Django template into a new directory named `myproject` and generates a `.env` file pre-populated with a random secret key and placeholder OAuth and email credentials.
+Copies the base Django template into a new `myproject/` directory and generates a `.env` file pre-populated with a random secret key and placeholder OAuth and email credentials.
 
 ---
 
-### Initialize SCSS
+### `init`
 
-Run this inside your project directory:
+Run inside your project directory:
 
 ```bash
 django-base init
 ```
 
-This creates the `static/scss` and `static/css` directories and generates a `package.json` configured with an SCSS watch script.
+Creates the `static/scss` and `static/css` directories and generates a `package.json` configured with an SCSS watch script.
 
 To also install the bundled SCSS template files:
 
@@ -78,92 +102,87 @@ To also install the bundled SCSS template files:
 django-base init --scss-templates
 ```
 
-If a `static/scss` directory already exists, you will be prompted before it is overwritten.
+> If a `static/scss` directory already exists, you will be prompted before it is overwritten.
 
 ---
 
-### Install Dependencies
-
-Run `npm install` and install the Sass compiler:
+### `install`
 
 ```bash
+# Install npm packages + Sass
 django-base install
-```
 
-Install only Sass without running `npm install`:
-
-```bash
+# Install Sass only (skip npm install)
 django-base install --no-npm
-```
 
-Install additional npm packages:
-
-```bash
+# Install additional npm packages
 django-base install --add axios --add alpinejs
 ```
 
 ---
 
-### Start the Development Server
-
-Starts the Django development server and the SCSS watcher concurrently:
+### `dev`
 
 ```bash
 django-base dev
 ```
 
-Press `Ctrl+C` to stop both processes. If either process exits unexpectedly, the other will be terminated automatically.
+Starts the Django development server and the SCSS watcher concurrently. Press `Ctrl+C` to stop both. If either process exits unexpectedly, the other is terminated automatically.
 
 ---
 
 ## Project Structure
 
-After running `django-base startproject myproject` and `django-base init`, your project will have the following layout:
+After running `startproject` and `init`, your project will look like this:
 
 ```
 myproject/
 ├── .env
 ├── package.json
 ├── manage.py
+├── myproject/
+│   ├── settings/
+│   ├── urls.py
+│   └── wsgi.py
 ├── static/
 │   ├── scss/
 │   └── css/
-└── ...
+└── templates/
 ```
 
 ---
 
-## Dependencies
+## Included Python Dependencies
 
-This package installs the following Python dependencies automatically:
+The scaffolded project comes with the following packages pre-installed:
 
-- Django
-- django-allauth (with social account support)
-- django-environ
-- django-htmx
-- django-livereload-server
-- django-compressor
-- click
-- Pillow
-- WhiteNoise
-- requests
+- `Django`
+- `django-allauth` (with Google & Facebook social account support)
+- `django-environ`
+- `django-htmx`
+- `django-livereload-server`
+- `django-compressor`
+- `click`
+- `Pillow`
+- `WhiteNoise`
+- `requests`
 
 ---
 
 ## Notes
 
-- On Windows, npm commands are resolved using `npm.cmd` automatically.
-- The `dev` command uses `sys.executable` to ensure the correct virtual environment Python is used when spawning the Django server.
-- The `static/scss` directory deletion uses a force-removal callback to handle read-only files on Windows.
+- **Windows**: npm commands are resolved using `npm.cmd` automatically.
+- **Virtual environments**: `django-base dev` uses `sys.executable` to ensure the correct Python interpreter is used when spawning the Django server.
+- **Windows read-only files**: The `static/scss` directory deletion uses a force-removal callback to handle read-only files.
 
 ---
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE](LICENSE) for details.
 
 ---
 
 ## Author
 
-Jamal Blaquera — [ugamedev08@gmail.com](mailto:ugamedev08@gmail.com)
+**Jamal Blaquera** — [ugamedev08@gmail.com](mailto:ugamedev08@gmail.com)
